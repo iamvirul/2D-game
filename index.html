@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Game final</title>
+    <link rel="icon" href="Resorsouces/Run (8).png" type="image/icon type"  >
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="body" onkeyup="keyCheck(event);" onload="createBoxes();">
+    <div class="start_window window active">
+      <div class="game_name">Infinite Loop Run</div>
+      <div class="buttons"><button class="btn start_btn">Start</button><button class="btn btn-sec" id="info_btn">Info</button></div>
+    </div>
+    <div class="info_window window">
+      <div class="game_name">Information</div>
+      <p class="info">
+       Press Start button to start the game and press Space key to jump from the fire balls.Enjoy the game and Good luck!
+      </p>
+      <div class="buttons"><button class="btn btn-sec" id="info_back_btn">Back</button></div>
+    </div>
+    <div class="game_over window">
+      <div class="game_name">Game Over</div>
+      <p class="info">You got <span class="over_socre">0</span> Score</p>
+      <div class="buttons"><button class="btn" onclick="window.location.reload()">Start Again</button></div>
+    </div>
+    <div class="background" id="background">
+      <img src="Resorsouces/Run (1).png" alt="Run" class="boy" id="boy" />
+      <div class="score" id="score">0</div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- Insite Game Start Functinos -->
+    <script defer>
+      let start_window = document.querySelector(".start_window");
+      let info_window = document.querySelector(".info_window");
+      let game_over_window = document.querySelector(".game_over");
+      // Hide Start Window When Enter or Space Pressed.
+      document.body.addEventListener("keyup", (e) => {
+        keyCode = e.which;
+        if (keyCode == 13 || keyCode == 32) {
+          start_window.classList.remove("active");
+        }
+      });
+      document.querySelector(".start_btn").addEventListener("click", (e) => {
+        keyCheck({
+          which: 13,
+        });
+        start_window.classList.remove("active");
+        info_window.classList.remove("active");
+        game_over_window.classList.remove("active");
+      });
+      document.getElementById("info_btn").addEventListener("click", (e) => {
+        start_window.classList.remove("active");
+        info_window.classList.add("active");
+        game_over_window.classList.remove("active");
+      });
+      document.getElementById("info_back_btn").addEventListener("click", (e) => {
+        start_window.classList.add("active");
+        info_window.classList.remove("active");
+        game_over_window.classList.remove("active");
+      });
+      function game_over_notify(score) {
+        game_over_window.classList.add("active");
+        document.querySelector(".over_socre").innerHTML = score;
+      }
+    
+    </script>
+    
+  </body>
+</html>
